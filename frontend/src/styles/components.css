@@ -1,0 +1,275 @@
+.app-shell {
+  min-height: 100vh;
+  background: var(--bg);
+}
+
+.header-shell {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface);
+  box-shadow: 0 8px 24px rgba(55, 44, 201, 0.08);
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.brand-link {
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--primary);
+}
+
+.nav-items {
+  display: flex;
+  gap: 18px;
+  margin-left: auto;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 13px 20px;
+  font-weight: 600;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 30px rgba(94, 53, 177, 0.18);
+}
+
+.button-small {
+  padding: 10px 16px;
+}
+
+.button-primary {
+  background: linear-gradient(135deg, #6f3ced 0%, #7f5af0 100%);
+}
+
+.hero-shell {
+  padding: 40px 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.hero-shell h1 {
+  font-size: clamp(2rem, 3.4vw, 3.6rem);
+  margin-bottom: 18px;
+}
+
+.lead {
+  font-size: 1.05rem;
+  max-width: 640px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.page-section {
+  padding: 24px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tag-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+}
+
+.tag-purple {
+  background: #7f5af0;
+}
+
+.tag-blue {
+  background: #4299e1;
+}
+
+.tag-green {
+  background: #38a169;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 44px rgba(55, 44, 201, 0.14);
+}
+
+.card-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+
+.card-content {
+  padding: 18px;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  margin: 14px 0 10px;
+}
+
+.card-description {
+  color: var(--text-secondary);
+  font-size: 0.98rem;
+  margin-bottom: 14px;
+  min-height: 60px;
+}
+
+.card-meta {
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.detail-card {
+  display: grid;
+  gap: 28px;
+  background: white;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.detail-image {
+  width: 100%;
+  object-fit: cover;
+  min-height: 320px;
+}
+
+.detail-content {
+  padding: 32px;
+}
+
+.detail-content h1 {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.detail-meta {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.detail-meta span {
+  display: inline-block;
+  background: rgba(94, 53, 177, 0.06);
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: var(--text);
+}
+
+.loader {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-align: center;
+  padding: 60px 0;
+}
+
+.filter-shell {
+  margin-bottom: 24px;
+}
+
+.filter-row {
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 16px;
+}
+
+.field {
+  width: 100%;
+  border: 1px solid #d9dafe;
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field:focus {
+  border-color: #7f5af0;
+  box-shadow: 0 0 0 4px rgba(127, 90, 240, 0.12);
+}
+
+.form-box {
+  max-width: 520px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.form-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.form-error {
+  color: #c53030;
+  font-weight: 600;
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+@media (min-width: 768px) {
+  .hero-shell {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

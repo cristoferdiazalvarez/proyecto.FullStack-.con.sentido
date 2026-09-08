@@ -1,0 +1,163 @@
+type,name,email,password,role,avatarUrl,title,description,category,level,price,instructorEmail,thumbnail,studentEmail,courseTitle,progress
+user,Ana Ramirez,ana@curso.com,pass123,student,https://i.pravatar.cc/150?img=1,,,,,,,,,
+user,Marc Lopez,marc@curso.com,pass456,instructor,https://i.pravatar.cc/150?img=2,,,,,,,,,
+user,Sara Gomez,sara@curso.com,pass789,admin,https://i.pravatar.cc/150?img=3,,,,,,,,,
+user,Luis Torres,luis@curso.com,passabc,student,https://i.pravatar.cc/150?img=4,,,,,,,,,
+user,Raquel Diaz,raquel@curso.com,passdef,student,https://i.pravatar.cc/150?img=5,,,,,,,,,
+user,David Pineda,david@curso.com,passghi,student,https://i.pravatar.cc/150?img=6,,,,,,,,,
+user,Ana Morales,anam@curso.com,passjkl,student,https://i.pravatar.cc/150?img=7,,,,,,,,,
+user,Carlos Peña,carlos@curso.com,passmno,student,https://i.pravatar.cc/150?img=8,,,,,,,,,
+user,Ines Suarez,ines@curso.com,passpqr,instructor,https://i.pravatar.cc/150?img=9,,,,,,,,,
+user,Jorge Ramirez,jorge@curso.com,passstu,student,https://i.pravatar.cc/150?img=10,,,,,,,,,
+user,Laura Castillo,laura@curso.com,passvwx,student,https://i.pravatar.cc/150?img=11,,,,,,,,,
+user,Mario Blanco,mario@curso.com,passyz1,instructor,https://i.pravatar.cc/150?img=12,,,,,,,,,
+user,Nuria Ruiz,nuria@curso.com,pass234,student,https://i.pravatar.cc/150?img=13,,,,,,,,,
+user,Omar Gil,omar@curso.com,pass567,student,https://i.pravatar.cc/150?img=14,,,,,,,,,
+user,Pilar Soto,pilar@curso.com,pass890,student,https://i.pravatar.cc/150?img=15,,,,,,,,,
+user,Ruben Vega,ruben@curso.com,pass135,student,https://i.pravatar.cc/150?img=16,,,,,,,,,
+user,Sofia Maldonado,sofia@curso.com,pass246,instructor,https://i.pravatar.cc/150?img=17,,,,,,,,,
+user,Tomas Herrera,tomas@curso.com,pass357,student,https://i.pravatar.cc/150?img=18,,,,,,,,,
+user,Valeria Cruz,valeria@curso.com,pass468,student,https://i.pravatar.cc/150?img=19,,,,,,,,,
+user,Ximena Nunez,ximena@curso.com,pass579,student,https://i.pravatar.cc/150?img=20,,,,,,,,,
+user,Yahir Campos,yahir@curso.com,pass680,student,https://i.pravatar.cc/150?img=21,,,,,,,,,
+user,Alejandro Saez,alejandro@curso.com,pass791,student,https://i.pravatar.cc/150?img=22,,,,,,,,,
+user,"Beatriz ,De la Torre",beatriz@curso.com,pass802,student,https://i.pravatar.cc/150?img=23,,,,,,,,,
+user,Carmen Vega,carmen@curso.com,pass913,student,https://i.pravatar.cc/150?img=24,,,,,,,,,
+user,Daniel Ortega,daniel@curso.com,pass024,student,https://i.pravatar.cc/150?img=25,,,,,,,,,
+course,,,,,,React con Chakra UI,Explora el desarrollo de interfaces interactivas y accesibles con React y Chakra UI.,Programación,intermediate,220,marc@curso.com,https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg,,,
+course,,,,,,Node.js y APIs REST,"Construye APIs robustas y seguras usando Node.js, Express y MongoDB.",Backend,intermediate,210,marc@curso.com,https://images.pexels.com/photos/1181672/pexels-photo-1181672.jpeg,,,
+course,,,,,,UX/UI para aplicaciones web,Aprende diseño centrado en el usuario para páginas elegantes y funcionales.,Diseño,beginner,180,ines@curso.com,https://images.pexels.com/photos/3183165/pexels-photo-3183165.jpeg,,,
+course,,,,,,Firebase y Autenticación,Gestiona usuarios y datos en la nube con Firebase Auth y Firestore.,Cloud,beginner,160,mario@curso.com,https://images.pexels.com/photos/1181673/pexels-photo-1181673.jpeg,,,
+course,,,,,,Programación funcional en JavaScript,"Aplica map, reduce, filter y patrones declarativos usando ES6+.",Programación,advanced,240,marc@curso.com,https://images.pexels.com/photos/1181674/pexels-photo-1181674.jpeg,,,
+course,,,,,,MongoDB para desarrolladores,"Modela datos, consultas y relaciones con Mongoose.",Backend,beginner,170,ines@curso.com,https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg,,,
+course,,,,,,Testing con React Testing Library,Escribe tests de integración y componentes para React.,Testing,advanced,230,sofia@curso.com,https://images.pexels.com/photos/1181676/pexels-photo-1181676.jpeg,,,
+course,,,,,,Deploy con Vercel y Netlify,Lleva tus apps al navegador poniendo en producción frontend y backend.,DevOps,beginner,190,mario@curso.com,https://images.pexels.com/photos/1181677/pexels-photo-1181677.jpeg,,,
+course,,,,,,Redux Toolkit en aplicaciones reales,Controla estado complejo con Redux Toolkit y middlewares.,Programación,advanced,250,marc@curso.com,https://images.pexels.com/photos/1181678/pexels-photo-1181678.jpeg,,,
+course,,,,,,GraphQL para APIs modernas,"Aprende queries, mutations y schemas con Apollo Client.",Backend,advanced,260,sofia@curso.com,https://images.pexels.com/photos/1181679/pexels-photo-1181679.jpeg,,,
+course,,,,,,JavaScript moderno: ES2024,"Domina novedades de JS, promesas, async/await y módulos.",Programación,beginner,160,ines@curso.com,https://images.pexels.com/photos/1181680/pexels-photo-1181680.jpeg,,,
+course,,,,,,Diseño de bases de datos relacionales,"Conoce normalización, claves foráneas y SQL básico.",Data,beginner,150,mario@curso.com,https://images.pexels.com/photos/1181681/pexels-photo-1181681.jpeg,,,
+course,,,,,,HTML semántico y accesibilidad,Crea interfaces accesibles para todos los usuarios.,Diseño,beginner,140,ines@curso.com,https://images.pexels.com/photos/1181682/pexels-photo-1181682.jpeg,,,
+course,,,,,,Animaciones CSS avanzadas,Mejora la experiencia de usuario con animaciones fluidas.,Frontend,intermediate,175,marc@curso.com,https://images.pexels.com/photos/1181683/pexels-photo-1181683.jpeg,,,
+course,,,,,,Prácticas de SEO para SPA,Optimiza tus apps React para mejorar exploración y ranking.,Frontend,intermediate,195,sofia@curso.com,https://images.pexels.com/photos/1181684/pexels-photo-1181684.jpeg,,,
+course,,,,,,Diseño responsivo con Flexbox y Grid,Construye layouts modernos adaptables a cualquier pantalla.,Frontend,intermediate,185,mario@curso.com,https://images.pexels.com/photos/1181685/pexels-photo-1181685.jpeg,,,
+course,,,,,,TypeScript desde cero,Agrega tipos seguros a tus proyectos web.,Programación,intermediate,210,ines@curso.com,https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg,,,
+course,,,,,,Gestión de proyectos con Git y GitHub,"Colabora, versiona y despliega usando Gitflows.",Herramientas,beginner,150,mario@curso.com,https://images.pexels.com/photos/1181687/pexels-photo-1181687.jpeg,,,
+course,,,,,,Automatización con GitHub Actions,Configura pipelines para CI/CD y pruebas automáticas.,DevOps,advanced,245,sofia@curso.com,https://images.pexels.com/photos/1181688/pexels-photo-1181688.jpeg,,,
+course,,,,,,Scrum y UX en equipos ágiles,Desarrolla productos con enfoque ágil y centrado en usuarios.,Gestión,beginner,170,ines@curso.com,https://images.pexels.com/photos/1181689/pexels-photo-1181689.jpeg,,,
+course,,,,,,Video marketing para desarrolladores,Aprende a presentar proyectos con storytelling visual.,Marketing,beginner,155,mario@curso.com,https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg,,,
+course,,,,,,Cloudinary y subida de imágenes,Integra subida de archivos y adminístralos en la nube.,Cloud,intermediate,220,marc@curso.com,https://images.pexels.com/photos/1181691/pexels-photo-1181691.jpeg,,,
+course,,,,,,Microservicios con Node.js,Divide aplicaciones en servicios independientes y escalables.,Backend,advanced,270,sofia@curso.com,https://images.pexels.com/photos/1181692/pexels-photo-1181692.jpeg,,,
+course,,,,,,Inteligencia artificial para frontend,Descubre cómo integrar IA en experiencias web.,AI,advanced,260,ines@curso.com,https://images.pexels.com/photos/1181693/pexels-photo-1181693.jpeg,,,
+course,,,,,,Proyectos FullStack con MongoDB,De la idea al despliegue con un stack real.,Backend,intermediate,215,marc@curso.com,https://images.pexels.com/photos/1181694/pexels-photo-1181694.jpeg,,,
+course,,,,,,Nube y contenedores para desarrolladores,"Entiende Docker, contenedores y despliegues básicos.",DevOps,advanced,255,mario@curso.com,https://images.pexels.com/photos/1181695/pexels-photo-1181695.jpeg,,,
+course,,,,,,Accesibilidad ARIA y lector de pantalla,Implementa buenas prácticas para usuarios con discapacidad.,Diseño,advanced,230,ines@curso.com,https://images.pexels.com/photos/1181696/pexels-photo-1181696.jpeg,,,
+enrollment,,,,,,,,,,,,,laura@curso.com,Proyectos FullStack con MongoDB,0
+enrollment,,,,,,,,,,,,,ruben@curso.com,Microservicios con Node.js,0
+enrollment,,,,,,,,,,,,,raquel@curso.com,Automatización con GitHub Actions,85
+enrollment,,,,,,,,,,,,,pilar@curso.com,Diseño responsivo con Flexbox y Grid,25
+enrollment,,,,,,,,,,,,,yahir@curso.com,JavaScript moderno: ES2024,25
+enrollment,,,,,,,,,,,,,luis@curso.com,Accesibilidad ARIA y lector de pantalla,40
+enrollment,,,,,,,,,,,,,daniel@curso.com,Prácticas de SEO para SPA,10
+enrollment,,,,,,,,,,,,,carmen@curso.com,UX/UI para aplicaciones web,0
+enrollment,,,,,,,,,,,,,ruben@curso.com,UX/UI para aplicaciones web,70
+enrollment,,,,,,,,,,,,,laura@curso.com,GraphQL para APIs modernas,25
+enrollment,,,,,,,,,,,,,valeria@curso.com,Proyectos FullStack con MongoDB,0
+enrollment,,,,,,,,,,,,,ximena@curso.com,GraphQL para APIs modernas,70
+enrollment,,,,,,,,,,,,,david@curso.com,Gestión de proyectos con Git y GitHub,10
+enrollment,,,,,,,,,,,,,nuria@curso.com,HTML semántico y accesibilidad,70
+enrollment,,,,,,,,,,,,,luis@curso.com,Node.js y APIs REST,0
+enrollment,,,,,,,,,,,,,anam@curso.com,Animaciones CSS avanzadas,40
+enrollment,,,,,,,,,,,,,laura@curso.com,Microservicios con Node.js,25
+enrollment,,,,,,,,,,,,,jorge@curso.com,Video marketing para desarrolladores,100
+enrollment,,,,,,,,,,,,,laura@curso.com,Cloudinary y subida de imágenes,70
+enrollment,,,,,,,,,,,,,luis@curso.com,Scrum y UX en equipos ágiles,40
+enrollment,,,,,,,,,,,,,tomas@curso.com,Animaciones CSS avanzadas,85
+enrollment,,,,,,,,,,,,,beatriz@curso.com,Automatización con GitHub Actions,0
+enrollment,,,,,,,,,,,,,omar@curso.com,UX/UI para aplicaciones web,25
+enrollment,,,,,,,,,,,,,yahir@curso.com,Accesibilidad ARIA y lector de pantalla,55
+enrollment,,,,,,,,,,,,,tomas@curso.com,React con Chakra UI,100
+enrollment,,,,,,,,,,,,,ana@curso.com,Microservicios con Node.js,100
+enrollment,,,,,,,,,,,,,carmen@curso.com,Testing con React Testing Library,25
+enrollment,,,,,,,,,,,,,ana@curso.com,Animaciones CSS avanzadas,100
+enrollment,,,,,,,,,,,,,anam@curso.com,Accesibilidad ARIA y lector de pantalla,10
+enrollment,,,,,,,,,,,,,alejandro@curso.com,Automatización con GitHub Actions,40
+enrollment,,,,,,,,,,,,,pilar@curso.com,GraphQL para APIs modernas,100
+enrollment,,,,,,,,,,,,,pilar@curso.com,Redux Toolkit en aplicaciones reales,55
+enrollment,,,,,,,,,,,,,anam@curso.com,Inteligencia artificial para frontend,10
+enrollment,,,,,,,,,,,,,daniel@curso.com,React con Chakra UI,10
+enrollment,,,,,,,,,,,,,anam@curso.com,Microservicios con Node.js,10
+enrollment,,,,,,,,,,,,,carlos@curso.com,Firebase y Autenticación,100
+enrollment,,,,,,,,,,,,,alejandro@curso.com,Prácticas de SEO para SPA,100
+enrollment,,,,,,,,,,,,,david@curso.com,Microservicios con Node.js,40
+enrollment,,,,,,,,,,,,,david@curso.com,Gestión de proyectos con Git y GitHub,100
+enrollment,,,,,,,,,,,,,nuria@curso.com,Nube y contenedores para desarrolladores,40
+enrollment,,,,,,,,,,,,,valeria@curso.com,Testing con React Testing Library,70
+enrollment,,,,,,,,,,,,,yahir@curso.com,Firebase y Autenticación,85
+enrollment,,,,,,,,,,,,,anam@curso.com,GraphQL para APIs modernas,40
+enrollment,,,,,,,,,,,,,david@curso.com,Animaciones CSS avanzadas,10
+enrollment,,,,,,,,,,,,,pilar@curso.com,Automatización con GitHub Actions,100
+enrollment,,,,,,,,,,,,,laura@curso.com,Video marketing para desarrolladores,100
+enrollment,,,,,,,,,,,,,david@curso.com,Video marketing para desarrolladores,40
+enrollment,,,,,,,,,,,,,yahir@curso.com,MongoDB para desarrolladores,25
+enrollment,,,,,,,,,,,,,valeria@curso.com,Diseño de bases de datos relacionales,0
+enrollment,,,,,,,,,,,,,omar@curso.com,UX/UI para aplicaciones web,0
+enrollment,,,,,,,,,,,,,luis@curso.com,HTML semántico y accesibilidad,40
+enrollment,,,,,,,,,,,,,pilar@curso.com,Diseño responsivo con Flexbox y Grid,55
+enrollment,,,,,,,,,,,,,daniel@curso.com,JavaScript moderno: ES2024,25
+enrollment,,,,,,,,,,,,,ruben@curso.com,Diseño de bases de datos relacionales,25
+enrollment,,,,,,,,,,,,,luis@curso.com,JavaScript moderno: ES2024,25
+enrollment,,,,,,,,,,,,,nuria@curso.com,UX/UI para aplicaciones web,10
+enrollment,,,,,,,,,,,,,david@curso.com,Automatización con GitHub Actions,85
+enrollment,,,,,,,,,,,,,valeria@curso.com,Accesibilidad ARIA y lector de pantalla,55
+enrollment,,,,,,,,,,,,,ruben@curso.com,TypeScript desde cero,25
+enrollment,,,,,,,,,,,,,carlos@curso.com,Diseño responsivo con Flexbox y Grid,10
+enrollment,,,,,,,,,,,,,carlos@curso.com,UX/UI para aplicaciones web,85
+enrollment,,,,,,,,,,,,,yahir@curso.com,TypeScript desde cero,0
+enrollment,,,,,,,,,,,,,pilar@curso.com,Accesibilidad ARIA y lector de pantalla,25
+enrollment,,,,,,,,,,,,,laura@curso.com,Nube y contenedores para desarrolladores,70
+enrollment,,,,,,,,,,,,,david@curso.com,Nube y contenedores para desarrolladores,55
+enrollment,,,,,,,,,,,,,david@curso.com,Redux Toolkit en aplicaciones reales,25
+enrollment,,,,,,,,,,,,,pilar@curso.com,GraphQL para APIs modernas,0
+enrollment,,,,,,,,,,,,,ximena@curso.com,MongoDB para desarrolladores,40
+enrollment,,,,,,,,,,,,,valeria@curso.com,React con Chakra UI,10
+enrollment,,,,,,,,,,,,,alejandro@curso.com,Firebase y Autenticación,40
+enrollment,,,,,,,,,,,,,yahir@curso.com,Nube y contenedores para desarrolladores,25
+enrollment,,,,,,,,,,,,,valeria@curso.com,JavaScript moderno: ES2024,70
+enrollment,,,,,,,,,,,,,raquel@curso.com,Programación funcional en JavaScript,100
+enrollment,,,,,,,,,,,,,tomas@curso.com,Node.js y APIs REST,55
+enrollment,,,,,,,,,,,,,valeria@curso.com,Proyectos FullStack con MongoDB,70
+enrollment,,,,,,,,,,,,,ruben@curso.com,Programación funcional en JavaScript,70
+enrollment,,,,,,,,,,,,,jorge@curso.com,Microservicios con Node.js,70
+enrollment,,,,,,,,,,,,,tomas@curso.com,Proyectos FullStack con MongoDB,55
+enrollment,,,,,,,,,,,,,beatriz@curso.com,JavaScript moderno: ES2024,70
+enrollment,,,,,,,,,,,,,ruben@curso.com,Microservicios con Node.js,0
+enrollment,,,,,,,,,,,,,valeria@curso.com,Scrum y UX en equipos ágiles,40
+enrollment,,,,,,,,,,,,,nuria@curso.com,Diseño responsivo con Flexbox y Grid,10
+enrollment,,,,,,,,,,,,,yahir@curso.com,Inteligencia artificial para frontend,10
+enrollment,,,,,,,,,,,,,tomas@curso.com,Testing con React Testing Library,55
+enrollment,,,,,,,,,,,,,ana@curso.com,UX/UI para aplicaciones web,55
+enrollment,,,,,,,,,,,,,tomas@curso.com,Nube y contenedores para desarrolladores,70
+enrollment,,,,,,,,,,,,,anam@curso.com,UX/UI para aplicaciones web,25
+enrollment,,,,,,,,,,,,,pilar@curso.com,Programación funcional en JavaScript,100
+enrollment,,,,,,,,,,,,,tomas@curso.com,Accesibilidad ARIA y lector de pantalla,40
+enrollment,,,,,,,,,,,,,anam@curso.com,Microservicios con Node.js,25
+enrollment,,,,,,,,,,,,,raquel@curso.com,Proyectos FullStack con MongoDB,70
+enrollment,,,,,,,,,,,,,beatriz@curso.com,Deploy con Vercel y Netlify,25
+enrollment,,,,,,,,,,,,,alejandro@curso.com,MongoDB para desarrolladores,40
+enrollment,,,,,,,,,,,,,laura@curso.com,React con Chakra UI,70
+enrollment,,,,,,,,,,,,,raquel@curso.com,Nube y contenedores para desarrolladores,55
+enrollment,,,,,,,,,,,,,pilar@curso.com,Proyectos FullStack con MongoDB,55
+enrollment,,,,,,,,,,,,,ximena@curso.com,JavaScript moderno: ES2024,70
+enrollment,,,,,,,,,,,,,carmen@curso.com,Node.js y APIs REST,0
+enrollment,,,,,,,,,,,,,ana@curso.com,TypeScript desde cero,25
+enrollment,,,,,,,,,,,,,laura@curso.com,Inteligencia artificial para frontend,40
+enrollment,,,,,,,,,,,,,ruben@curso.com,Automatización con GitHub Actions,25
+enrollment,,,,,,,,,,,,,ruben@curso.com,Automatización con GitHub Actions,40
+enrollment,,,,,,,,,,,,,pilar@curso.com,Cloudinary y subida de imágenes,0
+enrollment,,,,,,,,,,,,,nuria@curso.com,Node.js y APIs REST,70
+enrollment,,,,,,,,,,,,,ruben@curso.com,TypeScript desde cero,0
+enrollment,,,,,,,,,,,,,valeria@curso.com,JavaScript moderno: ES2024,55
+enrollment,,,,,,,,,,,,,pilar@curso.com,Video marketing para desarrolladores,0
+enrollment,,,,,,,,,,,,,laura@curso.com,Diseño responsivo con Flexbox y Grid,40
+enrollment,,,,,,,,,,,,,pilar@curso.com,Prácticas de SEO para SPA,100
+enrollment,,,,,,,,,,,,,beatriz@curso.com,Scrum y UX en equipos ágiles,25
