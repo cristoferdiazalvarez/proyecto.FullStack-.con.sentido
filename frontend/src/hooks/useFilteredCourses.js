@@ -1,20 +1,22 @@
-import { useMemo, useState } from 'react';
+import { useDeferredValue, useMemo, useState } from 'react';
 
 export const useFilteredCourses = (courses) => {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('all');
+  const deferredSearch = useDeferredValue(search.trim().toLocaleLowerCase());
 
   const filteredCourses = useMemo(() => {
     if (!courses) return [];
 
     return courses.filter((course) => {
-      const matchesCategory = category === 'all' || course.category.toLowerCase() === category.toLowerCase();
+      const matchesCategory = category === 'all'
+        || (course.category || '').toLocaleLowerCase() === category.toLocaleLowerCase();
       const matchesSearch = [course.title, course.description, course.level].some((field) =>
-        field.toLowerCase().includes(search.toLowerCase()),
+        (field || '').toLocaleLowerCase().includes(deferredSearch),
       );
       return matchesCategory && matchesSearch;
     });
-  }, [courses, category, search]);
+  }, [courses, category, deferredSearch]);
 
   return { filteredCourses, category, setCategory, search, setSearch };
 };

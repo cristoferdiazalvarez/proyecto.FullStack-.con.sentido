@@ -1,39 +1,31 @@
 # Proyecto FullStack con Sentido
 
-Este proyecto es una plataforma de cursos para estudiantes e instructores. Incluye:
-
-- Backend con Node.js, Express y MongoDB
-- Frontend con React, Chakra UI y React Query
-- Autenticación con JWT
-- Subida de imágenes opcional a Cloudinary
-- Banco de datos generado mediante CSV y `fs`
-- Relaciones entre usuarios, cursos y matrículas
+Plataforma de cursos para estudiantes e instructores, construida con React, React Router, Node.js, Express y MongoDB/Mongoose. Incluye autenticación JWT, matrículas relacionadas con usuarios y cursos, filtros de catálogo y subida opcional de imágenes con Cloudinary.
 
 ## Estructura
 
-- `/backend` - API y seeding de datos
-- `/frontend` - aplicación React
+- `backend/`: API, modelos Mongoose y carga inicial de datos.
+- `frontend/`: aplicación React, páginas, componentes, hooks y estilos CSS.
 
-## Cómo arrancar
+## Datos y relaciones
 
-### Backend
+`backend/src/seed/data.csv` es la hoja de datos disponible, exportada desde Excel como CSV UTF-8. Sus filas de tipo `user`, `course` y `enrollment` generan las colecciones `users`, `courses` y `enrollments`. Los cursos referencian a su instructor; cada matrícula referencia a un usuario y un curso mediante ObjectId.
 
-1. Copia `.env.example` a `.env`
-2. Ajusta `MONGODB_URI`, `JWT_SECRET` y credenciales de Cloudinary si lo deseas
-3. Instala dependencias: `cd backend && npm install`
-4. Semilla datos: `npm run seed`
-5. Ejecuta el servidor: `npm run dev`
+El importador hace upsert por correo, título y pareja estudiante-curso; volver a ejecutarlo no vacía las colecciones ni duplica esas entidades. Las contraseñas de la hoja se almacenan con bcrypt. Los datos de acceso del CSV son solo para desarrollo: cámbialos antes de cualquier despliegue.
 
-### Frontend
+## Puesta en marcha
 
-1. Instala dependencias: `cd frontend && npm install`
-2. Ejecuta la app: `npm run dev`
+Requisitos: Node.js 20 o posterior y MongoDB local o una instancia MongoDB accesible.
+
+1. Instala y arranca MongoDB localmente o configura una instancia MongoDB accesible.
+2. Desde `backend/`, copia `.env.example` a `.env`, configura `MONGODB_URI` y reemplaza `JWT_SECRET` por una clave aleatoria propia de al menos 32 caracteres. No publiques `.env`.
+3. Ejecuta `npm install` y después `npm run seed` desde `backend/` para importar los datos.
+4. Ejecuta `npm run dev` desde `backend/` para iniciar la API en `http://localhost:4000`.
+5. Desde `frontend/`, ejecuta `npm install` y `npm run dev` para iniciar Vite.
+
+La API y el importador requieren la misma `MONGODB_URI` persistente. Si no está configurada, el proceso se detiene con un mensaje claro; no usa una base en memoria que se pierda al cerrar.
 
 ## Arquitectura
 
-- Backend: rutas separadas por recursos, middleware de autenticación y autorización, modelo de usuarios, cursos y matrículas.
-- Frontend: hooks personalizados, rutas protegidas, componentes reutilizables, estilo global con variables CSS y Chakra UI.
-
-## Temática y sentido
-
-La aplicación está pensada para estudiantes que desean encontrar y seguir cursos prácticos. El sitio ofrece filtros por categoría, roles de usuario y una interfaz enfocada en la experiencia de aprendizaje.
+- Backend: rutas por recurso, middleware de autenticación/autorización y modelos separados para usuarios, cursos y matrículas.
+- Frontend: páginas por ruta, componentes reutilizables, hooks para carga y filtrado, y hojas CSS separadas para tokens, estilos globales y componentes.

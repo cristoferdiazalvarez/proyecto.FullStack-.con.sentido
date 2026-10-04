@@ -1,98 +1,18 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { MongoMemoryServer } from 'mongodb-memory-server';
 import csv from 'csv-parser';
+import bcrypt from 'bcryptjs';
 import User from '../models/User.js';
 import Course from '../models/Course.js';
 import Enrollment from '../models/Enrollment.js';
 
 dotenv.config();
 
-const csvFile = path.resolve('src/seed/data.csv');
-const createTempDir = (name) => {
-  const dir = path.resolve('./tmp', `${name}-${Date.now()}`);
-  fs.mkdirSync(dir, { recursive: true });
-  return dir;
-};
+const csvFile = new URL('./data.csv', import.meta.url);
 const users = [];
 const courses = [];
 const enrollments = [];
-
-const tryConnectUri = async (uri) => {
-  try {
-    const tempConn = await mongoose.createConnection(uri, { serverSelectionTimeoutMS: 2000 }).asPromise();
-    await tempConn.close();
-    return true;
-  } catch (error) {
-    console.warn('No se pudo conectar a MongoDB en', uri, ':', error.message);
-    return false;
-  }
-};
-
-let mongod = null;
-
-const getMongoUri = async () => {
-  const uri = process.env.MONGODB_URI;
-  if (uri && (await tryConnectUri(uri))) return uri;
-
-  console.warn('Usando MongoDB en memoria para seed.');
-  const cacheDir = path.resolve('node_modules/.cache/mongodb-memory-server');
-  if (!fs.existsSync(cacheDir)) {
-    fs.mkdirSync(cacheDir, { recursive: true });
-  }
-
-  const findCachedBinary = (dir) => {
-    try {
-      const files = fs.readdirSync(dir);
-      for (const f of files) {
-        if (f.startsWith('mongod')) return path.resolve(dir, f);
-      }
-    } catch (e) {
-      return null;
-    }
-    return null;
-  };
-  const cachedBinary = findCachedBinary(cacheDir);
-
-  // Reintentos para superar fallos intermitentes al arrancar mongod
-  const maxAttempts = 5;
-  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
-    const dbPath = createTempDir(`mongo-seed-${attempt}`);
-    try {
-      mongod = await MongoMemoryServer.create({
-        instance: { dbPath, storageEngine: 'ephemeralForTest', port: 0, ip: '127.0.0.1' },
-        binary: { downloadDir: cacheDir }
-      });
-      return mongod.getUri();
-    } catch (err) {
-      console.warn(`Intento ${attempt} falló al iniciar mongod:`, err && err.message ? err.message : err);
-      try {
-        if (mongod) await mongod.stop();
-      } catch (e) {}
-      // pequeño retardo antes del siguiente intento
-      await new Promise((r) => setTimeout(r, 200));
-    }
-  }
-
-  // último intento usando el binario directo si existe
-  if (cachedBinary) {
-    try {
-      console.warn('Intentando con el binario caché directo:', cachedBinary);
-      mongod = await MongoMemoryServer.create({
-        instance: { dbPath: createTempDir('mongo-seed-final'), storageEngine: 'ephemeralForTest', port: 0, ip: '127.0.0.1' },
-        binary: { systemBinary: cachedBinary }
-      });
-      return mongod.getUri();
-    } catch (e) {
-      console.warn('Fallback con binario directo falló:', e && e.message ? e.message : e);
-      try { if (mongod) await mongod.stop(); } catch (_) {}
-    }
-  }
-
-  throw new Error('No fue posible iniciar MongoDB en memoria tras varios intentos');
-};
 
 const parseCsv = () => new Promise((resolve, reject) => {
   fs.createReadStream(csvFile)
@@ -108,51 +28,91 @@ const parseCsv = () => new Promise((resolve, reject) => {
 
 const seed = async () => {
   try {
-    const uri = await getMongoUri();
-    await mongoose.connect(uri);
-    await User.deleteMany();
-    await Course.deleteMany();
-    await Enrollment.deleteMany();
-
-    const userDocs = await User.insertMany(users.map((item) => ({
-      name: item.name,
-      email: item.email,
-      password: item.password,
-      role: item.role,
-      avatarUrl: item.avatarUrl
-    })));
-
-    const courseDocs = await Course.insertMany(courses.map((item) => ({
-      title: item.title,
-      description: item.description,
-      category: item.category,
-      level: item.level,
-      price: Number(item.price),
-      instructor: userDocs.find((user) => user.email === item.instructorEmail)._id,
-      thumbnail: item.thumbnail
-    })));
-
-    await Enrollment.insertMany(enrollments.map((item) => ({
-      student: userDocs.find((user) => user.email === item.studentEmail)._id,
-      course: courseDocs.find((course) => course.title === item.courseTitle)._id,
-      progress: Number(item.progress) || 0
-    })));
-
-    console.log('Datos sembrados correctamente');
-    process.exit(0);
-  } catch (error) {
-    console.error(error);
-    if (mongod) {
-      await mongod.stop();
+    if (!process.env.MONGODB_URI) {
+      throw new Error('Configura MONGODB_URI en backend/.env para importar los datos en una base persistente.');
     }
-    process.exit(1);
+
+    await parseCsv();
+    if (users.length === 0 || courses.length === 0) {
+      throw new Error('El CSV debe contener al menos un usuario y un curso.');
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI);
+
+    const userOperations = await Promise.all(users.map(async (item) => ({
+      updateOne: {
+        filter: { email: item.email.trim().toLowerCase() },
+        update: {
+          $set: {
+            name: item.name.trim(),
+            email: item.email.trim().toLowerCase(),
+            password: await bcrypt.hash(item.password, 10),
+            role: item.role,
+            avatarUrl: item.avatarUrl
+          }
+        },
+        upsert: true
+      }
+    })));
+    await User.bulkWrite(userOperations);
+
+    const userDocs = await User.find({ email: { $in: users.map((item) => item.email.trim().toLowerCase()) } });
+    const usersByEmail = new Map(userDocs.map((user) => [user.email, user]));
+    const courseOperations = courses.map((item) => {
+      const instructor = usersByEmail.get(item.instructorEmail.trim().toLowerCase());
+      if (!instructor) throw new Error(`No existe el instructor ${item.instructorEmail} del curso "${item.title}".`);
+
+      return {
+        updateOne: {
+          filter: { title: item.title.trim() },
+          update: {
+            $set: {
+              title: item.title.trim(),
+              description: item.description,
+              category: item.category,
+              level: item.level,
+              price: Number(item.price),
+              instructor: instructor._id,
+              thumbnail: item.thumbnail
+            }
+          },
+          upsert: true
+        }
+      };
+    });
+    await Course.bulkWrite(courseOperations);
+
+    const courseDocs = await Course.find({ title: { $in: courses.map((item) => item.title.trim()) } });
+    const coursesByTitle = new Map(courseDocs.map((course) => [course.title, course]));
+    const uniqueEnrollments = new Map();
+    enrollments.forEach((item) => {
+      const student = usersByEmail.get(item.studentEmail.trim().toLowerCase());
+      const course = coursesByTitle.get(item.courseTitle.trim());
+      const progress = Number(item.progress);
+      if (!student) throw new Error(`No existe el estudiante ${item.studentEmail} de una matrícula.`);
+      if (!course) throw new Error(`No existe el curso "${item.courseTitle}" de una matrícula.`);
+      if (!Number.isFinite(progress) || progress < 0 || progress > 100) {
+        throw new Error(`El progreso de "${item.courseTitle}" debe estar entre 0 y 100.`);
+      }
+
+      uniqueEnrollments.set(`${student._id}:${course._id}`, { student, course, progress });
+    });
+    const enrollmentOperations = Array.from(uniqueEnrollments.values(), ({ student, course, progress }) => ({
+        updateOne: {
+          filter: { student: student._id, course: course._id },
+          update: { $set: { student: student._id, course: course._id, progress } },
+          upsert: true
+        }
+    }));
+    if (enrollmentOperations.length > 0) await Enrollment.bulkWrite(enrollmentOperations);
+
+    console.log(`Importación completada: ${users.length} usuarios, ${courses.length} cursos y ${enrollments.length} filas de matrícula (${enrollmentOperations.length} relaciones únicas).`);
+  } catch (error) {
+    console.error('No se pudieron importar los datos:', error.message);
+    process.exitCode = 1;
+  } finally {
+    await mongoose.disconnect();
   }
 };
 
-parseCsv().then(seed).catch(async (error) => {
-  console.error('Error leyendo el CSV', error);
-  if (mongod) {
-    await mongod.stop();
-  }
-  process.exit(1);
-});
+seed();

@@ -5,7 +5,7 @@ import CourseCard from '../components/CourseCard.jsx';
 import CourseFilter from '../components/CourseFilter.jsx';
 
 const HomePage = () => {
-  const { data: courses, isLoading } = useFetchCourses();
+  const { data: courses, isLoading, error } = useFetchCourses();
   const { filteredCourses, category, setCategory, search, setSearch } = useFilteredCourses(courses);
 
   return (
@@ -32,7 +32,11 @@ const HomePage = () => {
       </section>
 
       {isLoading ? (
-        <div className="loader">Cargando cursos...</div>
+        <div className="loader" role="status" aria-live="polite">Cargando cursos...</div>
+      ) : error ? (
+        <p className="catalog-feedback" role="alert">{error}</p>
+      ) : filteredCourses.length === 0 ? (
+        <p className="catalog-feedback" role="status">No hay cursos que coincidan con la búsqueda.</p>
       ) : (
         <div className="grid cards-grid">
           {filteredCourses.map((course) => (

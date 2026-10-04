@@ -1,15 +1,3 @@
-:root {
-  --bg: #f5f7ff;
-  --surface: #ffffff;
-  --primary: #5e35b1;
-  --primary-dark: #472a8b;
-  --text: #1b1f3b;
-  --text-secondary: #6f7282;
-  --border: #e6e8ff;
-  --radius: 24px;
-  --spacing: 24px;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -25,15 +13,37 @@ body {
   color: var(--text);
 }
 
+#root {
+  min-height: 100vh;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
-button, input {
-  font: inherit;
+img {
+  display: block;
+  max-width: 100%;
 }
 
-#root {
-  min-height: 100vh;
+:focus-visible {
+  outline: 3px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

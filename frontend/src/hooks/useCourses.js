@@ -7,18 +7,23 @@ export const useFetchCourses = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchCourses = async () => {
       try {
-        const response = await API.get('/courses');
+        const response = await API.get('/courses', { signal: controller.signal });
         setData(response.data);
       } catch (err) {
-        setError(err);
+        if (!controller.signal.aborted) {
+          setError(err.response?.data?.message || 'No se pudieron cargar los cursos. Inténtalo de nuevo.');
+        }
       } finally {
-        setIsLoading(false);
+        if (!controller.signal.aborted) setIsLoading(false);
       }
     };
 
     fetchCourses();
+    return () => controller.abort();
   }, []);
 
   return { data, isLoading, error };
