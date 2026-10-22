@@ -34,7 +34,7 @@ El proyecto se puede publicar separando la API en [Render](https://render.com/),
 1. En Render, crea un **Blueprint** desde el repositorio. Render leerá [render.yaml](render.yaml) y creará la API con los comandos, el chequeo de salud y un `JWT_SECRET` generado.
 2. Cuando lo solicite, configura `MONGODB_URI` con la cadena de conexión de Atlas. Tras crear el servicio, configura `FRONTEND_URL` con el dominio de producción de Vercel, sin barra final.
 3. Cuando el servicio esté activo, copia su URL pública, por ejemplo `https://nombre-del-servicio.onrender.com`. El chequeo `https://nombre-del-servicio.onrender.com/api/health` debe responder `{"status":"ok"}`.
-4. Para cargar los cursos de demostración, configura temporalmente `SEED_PASSWORD` como variable secreta del servicio y ejecuta `npm run seed` desde el Shell de Render. Esa contraseña sustituye las contraseñas del CSV para todas las cuentas de demostración y, en producción, esas cuentas se crean solo con rol estudiante. Elimina la variable temporal después; no uses ninguna contraseña incluida en el CSV. Crea cualquier cuenta de instructor o administrador por un proceso separado y controlado.
+4. Para cargar los cursos de demostración, ejecuta `npm run seed` desde `backend/` en tu equipo, con `MONGODB_URI` apuntando a Atlas, `NODE_ENV=production` y una variable temporal `SEED_PASSWORD`. Esa contraseña sustituye las contraseñas del CSV para todas las cuentas de demostración y, en producción, esas cuentas se crean solo con rol estudiante. No añadas estas variables a archivos versionados ni compartas sus valores. Crea cualquier cuenta de instructor o administrador por un proceso separado y controlado.
 
 ### Frontend en Vercel
 
