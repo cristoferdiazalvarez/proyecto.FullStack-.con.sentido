@@ -27,28 +27,24 @@ La API y el importador requieren la misma `MONGODB_URI` persistente. Si no está
 
 ## Despliegue
 
-El proyecto se puede publicar separando la API en [Render](https://render.com/), el frontend en [Vercel](https://vercel.com/) y la base de datos en [MongoDB Atlas](https://www.mongodb.com/atlas). Crea una base de datos en Atlas y permite las conexiones de red del servicio de Render.
+El frontend está publicado como sitio estático gratuito en [Render](https://render.com/). La API se publica como servicio web en Render y usa MongoDB Atlas. Crea una base de datos en Atlas y permite las conexiones de red necesarias para el servicio de Render.
 
 ### API en Render
 
-1. En Render, crea un **Blueprint** desde el repositorio. Render leerá [render.yaml](render.yaml) y creará la API con los comandos, el chequeo de salud y un `JWT_SECRET` generado.
-2. Cuando lo solicite, configura `MONGODB_URI` con la cadena de conexión de Atlas. Tras crear el servicio, configura `FRONTEND_URL` con el dominio de producción de Vercel, sin barra final.
+1. Crea un Web Service desde el repositorio público, en la rama `main`, con raíz `backend/`, comando de instalación `npm install`, comando de inicio `npm start` y plan gratuito. También puedes crear el servicio desde el Blueprint [render.yaml](render.yaml).
+2. Configura `NODE_ENV=production`, genera `JWT_SECRET` desde Render, configura `MONGODB_URI` con la cadena de conexión de Atlas y configura `FRONTEND_URL=https://proyecto-fullstack-web.onrender.com`.
 3. Cuando el servicio esté activo, copia su URL pública, por ejemplo `https://nombre-del-servicio.onrender.com`. El chequeo `https://nombre-del-servicio.onrender.com/api/health` debe responder `{"status":"ok"}`.
 4. Para cargar los cursos de demostración, ejecuta `npm run seed` desde `backend/` en tu equipo, con `MONGODB_URI` apuntando a Atlas, `NODE_ENV=production` y una variable temporal `SEED_PASSWORD`. Esa contraseña sustituye las contraseñas del CSV para todas las cuentas de demostración y, en producción, esas cuentas se crean solo con rol estudiante. No añadas estas variables a archivos versionados ni compartas sus valores. Crea cualquier cuenta de instructor o administrador por un proceso separado y controlado.
 
-### Frontend en Vercel
+### Frontend en Render
 
-1. Importa el mismo repositorio y establece `frontend` como **Root Directory**.
-2. Usa `npm run build` como comando de compilación y `dist` como directorio de salida.
-3. Añade `VITE_API_URL` con la URL pública de Render seguida de `/api`, por ejemplo `https://nombre-del-servicio.onrender.com/api`, y despliega.
-4. La configuración de [frontend/vercel.json](frontend/vercel.json) permite abrir o actualizar directamente las rutas de React.
-5. Copia el dominio de producción de Vercel en `FRONTEND_URL` en Render para permitir las llamadas del navegador y vuelve a desplegar la API.
+El frontend está publicado en [https://proyecto-fullstack-web.onrender.com](https://proyecto-fullstack-web.onrender.com). El sitio usa `VITE_API_URL` para llamar a la API; revisa que su valor sea la URL real del servicio backend terminada en `/api`.
 
 ### Enlaces públicos
 
-Después del despliegue, copia aquí las URLs reales que muestran Vercel y Render para poder compartirlas y verificar la entrega:
+Enlaces de despliegue:
 
-- Aplicación: pendiente de publicar en Vercel.
+- Aplicación: [https://proyecto-fullstack-web.onrender.com](https://proyecto-fullstack-web.onrender.com) (frontend publicado; requiere API para cargar cursos y completar matrículas).
 - API: pendiente de publicar en Render.
 
 En desarrollo local, el frontend usa el proxy de Vite hacia `http://localhost:4000`. En producción usa `VITE_API_URL`; no necesita apuntar a `localhost`.
