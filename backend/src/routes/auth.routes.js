@@ -9,12 +9,12 @@ const generateToken = (user) => jwt.sign({ id: user._id, role: user.role }, proc
 
 router.post('/register', async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
     const existing = await User.findOne({ email });
     if (existing) return res.status(409).json({ message: 'El correo ya está registrado' });
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = new User({ ...req.body, password: hashedPassword });
+    const user = new User({ name, email, password: hashedPassword });
     await user.save();
 
     const token = generateToken(user);

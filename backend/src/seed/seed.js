@@ -31,6 +31,9 @@ const seed = async () => {
     if (!process.env.MONGODB_URI) {
       throw new Error('Configura MONGODB_URI en backend/.env para importar los datos en una base persistente.');
     }
+    if (process.env.NODE_ENV === 'production' && !process.env.SEED_PASSWORD) {
+      throw new Error('En producción configura temporalmente SEED_PASSWORD para no usar las contraseñas públicas del CSV.');
+    }
 
     await parseCsv();
     if (users.length === 0 || courses.length === 0) {
@@ -46,8 +49,8 @@ const seed = async () => {
           $set: {
             name: item.name.trim(),
             email: item.email.trim().toLowerCase(),
-            password: await bcrypt.hash(item.password, 10),
-            role: item.role,
+            password: await bcrypt.hash(process.env.SEED_PASSWORD || item.password, 10),
+            role: process.env.NODE_ENV === 'production' ? 'student' : item.role,
             avatarUrl: item.avatarUrl
           }
         },
