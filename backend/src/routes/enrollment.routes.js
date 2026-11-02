@@ -8,7 +8,7 @@ router.get('/', verifyToken, async (req, res, next) => {
   try {
     const enrollments = await Enrollment.find({ student: req.user.id })
       .populate('student', 'name email')
-      .populate('course', 'title category');
+      .populate('course', 'title description category level price thumbnail');
     res.json(enrollments);
   } catch (error) {
     next(error);

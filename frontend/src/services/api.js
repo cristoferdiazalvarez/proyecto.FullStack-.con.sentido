@@ -1,7 +1,10 @@
 import axios from 'axios';
 
+const baseURL = import.meta.env.VITE_API_URL
+  || (import.meta.env.PROD ? 'https://proyecto-fullstack-api.onrender.com/api' : '/api');
+
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api',
+  baseURL,
 });
 
 export const setAuthToken = (token) => {

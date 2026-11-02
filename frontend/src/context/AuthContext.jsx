@@ -6,7 +6,9 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
     const stored = window.localStorage.getItem('user');
-    return stored ? JSON.parse(stored) : null;
+    const parsedUser = stored ? JSON.parse(stored) : null;
+    setAuthToken(parsedUser?.token || null);
+    return parsedUser;
   });
 
   useEffect(() => {

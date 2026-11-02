@@ -10,8 +10,9 @@ const Header = () => {
         <div className="nav-items">
           <RouterLink to="/" className="nav-link">Inicio</RouterLink>
           {!user && <RouterLink to="/login" className="nav-link">Ingresar</RouterLink>}
-          {!user && <RouterLink to="/register" className="nav-link">Registro</RouterLink>}
+          {!user && <RouterLink to="/register" className="nav-link">Crear cuenta</RouterLink>}
           {user && <RouterLink to="/profile" className="nav-link">Mi perfil</RouterLink>}
+          {['instructor', 'admin'].includes(user?.role) && <RouterLink to="/courses/new" className="nav-link">Crear curso</RouterLink>}
           {user && <button type="button" className="button button-small" onClick={logout}>Salir</button>}
         </div>
       </nav>

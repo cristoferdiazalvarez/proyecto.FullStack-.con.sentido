@@ -3,10 +3,12 @@ import { useFetchCourses } from '../hooks/useCourses.js';
 import { useFilteredCourses } from '../hooks/useFilteredCourses.js';
 import CourseCard from '../components/CourseCard.jsx';
 import CourseFilter from '../components/CourseFilter.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const HomePage = () => {
   const { data: courses, isLoading, error } = useFetchCourses();
   const { filteredCourses, category, setCategory, search, setSearch } = useFilteredCourses(courses);
+  const { user } = useAuth();
 
   return (
     <main className="page-section">
@@ -14,7 +16,9 @@ const HomePage = () => {
         <div>
           <h1>Cursos para aprender con propósito</h1>
           <p className="lead">Descubre cursos de backend, frontend, UX/UI y herramientas en una plataforma pensada para tu crecimiento.</p>
-          <RouterLink to="/register" className="button button-primary">Comenzar ahora</RouterLink>
+          <RouterLink to={user ? '#cursos' : '/register'} className="button button-primary">
+            {user ? 'Explorar cursos' : 'Comenzar ahora'}
+          </RouterLink>
         </div>
       </section>
 
@@ -22,7 +26,7 @@ const HomePage = () => {
 
       <section className="section-heading">
         <div>
-          <h2>Cursos disponibles</h2>
+          <h2 id="cursos">Cursos disponibles</h2>
           <div className="tag-row">
             <span className="tag tag-purple">React</span>
             <span className="tag tag-blue">Node.js</span>

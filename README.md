@@ -7,6 +7,15 @@ Plataforma de cursos para estudiantes e instructores, construida con React, Reac
 - `backend/`: API, modelos Mongoose y carga inicial de datos.
 - `frontend/`: aplicación React, páginas, componentes, hooks y estilos CSS.
 
+## Funcionalidades
+
+- Inicio de sesión y registro comparten una pantalla y un formulario; las cuentas nuevas se crean como estudiantes.
+- El registro requiere una contraseña de al menos 10 caracteres. La API aplica el mismo requisito aunque se omita el formulario web.
+- Estudiantes consultan sus cursos inscritos desde el perfil; la ficha del curso muestra el estado de inscripción.
+- Instructores y administradores pueden crear cursos desde «Crear curso». Su autoría se asigna desde la sesión autenticada, no desde los datos enviados por el navegador.
+- El perfil de instructor muestra sus cursos publicados. El perfil de administrador incluye un resumen de usuarios y acceso a creación de cursos.
+- Las cuentas de instructor y administrador deben asignarse mediante un proceso administrativo controlado; el registro público no permite elegir esos roles.
+
 ## Datos y relaciones
 
 `backend/src/seed/data.csv` es la hoja de datos disponible, exportada desde Excel como CSV UTF-8. Sus filas de tipo `user`, `course` y `enrollment` generan las colecciones `users`, `courses` y `enrollments`. Los cursos referencian a su instructor; cada matrícula referencia a un usuario y un curso mediante ObjectId.
@@ -34,20 +43,23 @@ El frontend está publicado como sitio estático gratuito en [Render](https://re
 1. Crea un Web Service desde el repositorio público, en la rama `main`, con raíz `backend/`, comando de instalación `npm install`, comando de inicio `npm start` y plan gratuito. También puedes crear el servicio desde el Blueprint [render.yaml](render.yaml).
 2. Configura `NODE_ENV=production`, genera `JWT_SECRET` desde Render, configura `MONGODB_URI` con la cadena de conexión de Atlas y configura `FRONTEND_URL=https://proyecto-fullstack-web.onrender.com`.
 3. Cuando el servicio esté activo, copia su URL pública, por ejemplo `https://nombre-del-servicio.onrender.com`. El chequeo `https://nombre-del-servicio.onrender.com/api/health` debe responder `{"status":"ok"}`.
-4. Para cargar los cursos de demostración, ejecuta `npm run seed` desde `backend/` en tu equipo, con `MONGODB_URI` apuntando a Atlas, `NODE_ENV=production` y una variable temporal `SEED_PASSWORD`. Esa contraseña sustituye las contraseñas del CSV para todas las cuentas de demostración y, en producción, esas cuentas se crean solo con rol estudiante. No añadas estas variables a archivos versionados ni compartas sus valores. Crea cualquier cuenta de instructor o administrador por un proceso separado y controlado.
+4. Para cargar los cursos de demostración, ejecuta `npm run seed` desde `backend/` en tu equipo, con `MONGODB_URI` apuntando a Atlas, `NODE_ENV=production` y una variable temporal `SEED_PASSWORD`. Esa contraseña sustituye las contraseñas del CSV para todas las cuentas de demostración y, en producción, esas cuentas se crean solo con rol estudiante. No añadas estas variables a archivos versionados ni compartas sus valores.
+5. Si necesitas cuentas de demostración para los paneles de instructor o administrador, crea primero sus cuentas y asigna los roles manualmente desde una sesión segura de `mongosh` conectada a esa misma base de datos. Por ejemplo: `db.users.updateOne({ email: "correo-propio@example.com" }, { $set: { role: "instructor" } })`. Usa `admin` solo para una cuenta bajo tu control; el registro público nunca permite asignar esos roles.
 
 ### Frontend en Render
 
-El frontend está publicado en [https://proyecto-fullstack-web.onrender.com](https://proyecto-fullstack-web.onrender.com). El sitio usa `VITE_API_URL` para llamar a la API; revisa que su valor sea la URL real del servicio backend terminada en `/api`.
+El frontend está publicado en [https://proyecto-fullstack-web.onrender.com](https://proyecto-fullstack-web.onrender.com). El sitio usa `VITE_API_URL` para llamar a la API. Si no se define en producción, el frontend utiliza la URL del servicio configurado en `render.yaml`; para otro proveedor o nombre de servicio, configúrala con la URL pública terminada en `/api`.
+
+El backend debe publicarse y estar activo para que funcionen el catálogo, el acceso, las matrículas y la creación de cursos. En el servicio frontend, configura `VITE_API_URL` con la URL pública del backend terminada en `/api` (para el servicio de `render.yaml`: `https://proyecto-fullstack-api.onrender.com/api`) y vuelve a desplegar el frontend para que Vite incorpore el valor. Comprueba primero que la URL del backend seguida de `/api/health` responda `{"status":"ok"}`. El archivo `frontend/.env.example` con `/api` es para desarrollo local, no para el despliegue estático.
 
 ### Enlaces públicos
 
 Enlaces de despliegue:
 
 - Aplicación: [https://proyecto-fullstack-web.onrender.com](https://proyecto-fullstack-web.onrender.com) (frontend publicado; requiere API para cargar cursos y completar matrículas).
-- API: pendiente de publicar en Render.
+- API configurada en el Blueprint: `https://proyecto-fullstack-api.onrender.com` (verifica `/api/health`; el servicio no respondió durante la última comprobación).
 
-En desarrollo local, el frontend usa el proxy de Vite hacia `http://localhost:4000`. En producción usa `VITE_API_URL`; no necesita apuntar a `localhost`.
+En desarrollo local, el frontend usa el proxy de Vite hacia `http://localhost:4000`. En producción usa `VITE_API_URL` o, si no se define, el backend del Blueprint; no debe apuntar a `localhost`.
 
 ## Arquitectura
 
